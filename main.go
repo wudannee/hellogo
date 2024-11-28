@@ -1,47 +1,11 @@
 package main
 
 import (
-	"fmt"
-	"math/big"
-
-	"golang.org/x/exp/constraints"
+	"hellogo/ch2"
 )
 
-type MathStuff[T constraints.Ordered] struct {
-}
-
-func (ms *MathStuff[T]) Fibonacci(n int) *big.Int {
-	a := big.NewInt(0)
-	b := big.NewInt(1)
-
-	for i := 0; i < n; i++ {
-		temp := new(big.Int).Set(b)
-		b.Add(a, b)
-		a.Set(temp)
-	}
-
-	return a
-}
-
-func (ms *MathStuff[T]) Max(a, b T) T {
-	if a > b {
-		return a
-	}
-	return b
-}
-
 func main() {
-	mathStuff := &MathStuff[float64]{}
-	if mathStuff == nil {
-		fmt.Println("mathStuff is nil")
-	}
+	ch2.DemoMathStuffs()
+	ch2.DemoXml(ch2.QUICK_MODE)
 
-	result := mathStuff.Max(1.2, 3.14)
-	fmt.Println("result:", result)
-	for i := 0; i <= 3; i++ {
-		fmt.Printf("fib(%d) = %s\n", i, mathStuff.Fibonacci(i).String())
-	}
-
-	demo_xml(1)
 }
-

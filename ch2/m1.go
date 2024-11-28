@@ -1,4 +1,5 @@
-package main
+// Xml parsing
+package ch2
 
 import (
 	"encoding/xml"
@@ -22,7 +23,8 @@ const (
 	NORMAL_MODE
 )
 
-func demo_xml(mode Mode) {
+// DemoXml parses the student.xml file and prints out the student's information.
+func DemoXml(mode Mode) {
 	file, err := os.Open("student.xml")
 	if err != nil {
 		fmt.Println("Error opening file:", err)
@@ -59,4 +61,3 @@ func demo_xml(mode Mode) {
 	fmt.Printf("Department: %s\n", student.Department)
 
 }
-
