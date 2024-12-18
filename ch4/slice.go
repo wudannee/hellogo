@@ -42,4 +42,17 @@ func DemoSlice() {
 	slice3 := slice2[2:6]
 	// slice3 has 4 elements now and its capacity is 10 (caculation of capacity is 12 - 2 = 10)
 	fmt.Println("capacity of slice3:", cap(slice3))
+
+	slice4 := []int{1, 2, 3, 4, 5}
+	slice5 := slice4[1:2]
+	fmt.Println("slice5:", slice5, "capacity of slice5:", cap(slice5))
+	// append 10 to slice5, which will cause the slice to expand, and affect slice4 to [1, 2, 10, 4, 5]
+	/*
+		// to avoid affecting slice4, we need to use the following code
+		slice5 = make([]int, len(slice4[1:2]))
+		copy(slice5, slice4[1:2])
+	*/
+	slice5 = append(slice5, 10)
+	fmt.Println("slice4:", slice4)
+	fmt.Println("slice5:", slice5)
 }
