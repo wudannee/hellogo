@@ -44,13 +44,23 @@ func DemoSlice() {
 	fmt.Println("capacity of slice3:", cap(slice3))
 
 	slice4 := []int{1, 2, 3, 4, 5}
-	slice5 := slice4[1:2]
+	slice5 := slice4[1:2] // [2]
 	fmt.Println("slice5:", slice5, "capacity of slice5:", cap(slice5))
 	// append 10 to slice5, which will cause the slice to expand, and affect slice4 to [1, 2, 10, 4, 5]
 	/*
 		// to avoid affecting slice4, we need to use the following code
 		slice5 = make([]int, len(slice4[1:2]))
 		copy(slice5, slice4[1:2])
+	*/
+
+	/*
+		// to avoid affecting slice4, a third parameter can be used when slicing to specify the new slice's capacity limit
+		// this can prevent unintended modifications when sharing the underlying array.
+		slice5 := slice4[1:2:2]
+
+		syntax: slice5 := slice4[low:high:max]
+		setting a small max value limits the slice's capacity
+		restricting its access to the underlying array and preventing it from affecting other slices.
 	*/
 	slice5 = append(slice5, 10)
 	fmt.Println("slice4:", slice4)
