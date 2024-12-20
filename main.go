@@ -11,6 +11,7 @@ func main() {
 	// ch3.DemoWords()
 
 	// ch4.DemoArray()
-	ch4.DemoSlice()
+	// ch4.DemoSlice()
+	ch4.DemoMap()
 
 }
