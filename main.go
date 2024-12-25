@@ -1,7 +1,7 @@
 package main
 
 import (
-	"hellogo/ch4"
+	"hellogo/ch5"
 )
 
 func main() {
@@ -12,6 +12,8 @@ func main() {
 
 	// ch4.DemoArray()
 	// ch4.DemoSlice()
-	ch4.DemoMap()
+	// ch4.DemoMap()
+
+	ch5.DemoStruct()
 
 }
