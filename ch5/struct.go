@@ -9,10 +9,11 @@ type Person struct {
 	Age  int
 }
 
-func DemoStruct() {
-	p := Person{Name: "Susan", Age: 16}
-	fmt.Println("p:", p)
+func (p *Person) SetName(name string) {
+	p.Name = name
+}
 
+func DemoStruct() {
 	var k []int
 	if k == nil {
 		fmt.Println("k is nil", k)
@@ -26,4 +27,17 @@ func DemoStruct() {
 	if j != nil {
 		fmt.Println("j is not nil", j, len(j), cap(j))
 	}
+
+	// create a struct variable
+	p := Person{Name: "Susan", Age: 16}
+	fmt.Println("p:", p)
+	// When a method with a pointer receiver is called on a value, the compiler automatically takes the address of the value and passes a pointer to the method.
+	p.SetName("John")
+	fmt.Println("john?", p)
+
+	// create a pointer to the struct variable
+	fmt.Println("create a pointer to the struct variable")
+	pr := &p
+	pr.SetName("Lucy")
+	fmt.Println("after change p:", pr)
 }
