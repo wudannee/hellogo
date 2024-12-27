@@ -55,6 +55,13 @@ func DemoStruct() {
 			p2 = new(Person)
 			operateP2()
 		}
+
+		// resume the demo when the panic is handled
+		ResumeDemoStruct()
 	}()
 	operateP2()
+}
+
+func ResumeDemoStruct() {
+	fmt.Println("resume demo struct")
 }
