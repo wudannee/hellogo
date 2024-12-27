@@ -40,4 +40,21 @@ func DemoStruct() {
 	pr := &p
 	pr.SetName("Lucy")
 	fmt.Println("after change p:", pr)
+
+	// var p2 = new(Person)
+	// try to call a method on a nil pointer to struct, and fix the panic issue
+	var p2 *Person
+	operateP2 := func() {
+		p2.SetName("Tom")
+		fmt.Println("p2:", p2)
+	}
+	defer func() {
+		if err := recover(); err != nil {
+			fmt.Println("ERROR:", err)
+			// possibly p2 is nil, so we need to new it before calling operateP2
+			p2 = new(Person)
+			operateP2()
+		}
+	}()
+	operateP2()
 }
