@@ -2,6 +2,7 @@ package ch5
 
 import (
 	"fmt"
+	"time"
 )
 
 type Person struct {
@@ -64,4 +65,57 @@ func DemoStruct() {
 
 func ResumeDemoStruct() {
 	fmt.Println("resume demo struct")
+	playWithTime()
+
+}
+
+func playWithTime() {
+	now := time.Now()
+	loc, err := time.LoadLocation("Asia/Seoul")
+	if err != nil {
+		fmt.Println("Error loading location:", err)
+		return
+	}
+	now = now.In(loc)
+	fmt.Println("now:", now)
+	name, offset := now.Zone()
+	fmt.Println("offset:", offset/3600, name)
+
+	loc = time.FixedZone("", -5*3600)
+	now = now.In(loc)
+	name, offset = now.Zone()
+	fmt.Println("-5,now:", now, "/", name, offset/3600)
+
+	// custom time marshal and unmarshal
+	var t CustomTime = CustomTime{Time: now}
+	b, err := t.MarshalText()
+	if err != nil {
+		fmt.Println("time failed to marshal text:", err)
+		return
+	}
+	s := string(b)
+	fmt.Println("marshal text:", s)
+
+	t.UnmarshalText([]byte(s))
+	fmt.Println("unmarshal text:", t)
+	layout :=  "2006.01.02"
+	fmt.Printf("and then format it with layout<%s>: %s\n", layout, t.Format(layout))
+}
+
+type CustomTime struct {
+	time.Time
+}
+
+func (c *CustomTime) UnmarshalText(b []byte) error {
+	t, err := time.Parse("2006/01/02", string(b))
+	if err != nil {
+		return err
+	}
+	c.Time = t
+	return nil
+}
+
+func (c *CustomTime) MarshalText() (text []byte, err error) {
+	text = []byte(c.Format("2006/01/02"))
+	return text, nil
 }
