@@ -14,6 +14,7 @@ func main() {
 	// ch4.DemoSlice()
 	// ch4.DemoMap()
 
-	ch5.DemoStruct()
+	// ch5.DemoStruct()
+	ch5.DemoInterface()
 
 }
